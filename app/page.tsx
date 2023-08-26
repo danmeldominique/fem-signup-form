@@ -2,6 +2,7 @@
 
 import EmailForm from "@/components/EmailForm";
 import ListItem from "@/components/ListItem";
+import Subscribed from "@/components/Subscribed";
 import { useNewsletterContext } from "@/context/NewsletterContext";
 import DesktopImage from "@/public/illustration-sign-up-desktop.svg";
 import MobileImage from "@/public/illustration-sign-up-mobile.svg";
@@ -15,7 +16,7 @@ export default function Home() {
   return (
     <main className="h-screen md:bg-charcoalGray text-charcoalGray md:flex md:justify-center md:items-center">
       {/* container */}
-      <section className={clsx('flex flex-col md:flex-row relative h-full md:w-fit md:mx-auto md:h-2/3 md:bg-white md:justify-center md:rounded-[1rem] md:p-[1rem] md:shadow-lg md:drop-shadow-lg', {'hidden':success})}>
+      <section className={clsx('flex flex-col md:flex-row relative h-full md:w-fit md:mx-auto md:h-2/3 md:bg-white md:justify-center md:rounded-[1rem] md:p-[1rem] md:shadow-lg md:drop-shadow-lg', {'hidden':success == 'true'})}>
         {/* Image */}
       <div className="h-48 md:h-full overflow-hidden rounded-b-[1rem] md:rounded-[1rem]">
         <Image src={MobileImage} alt="Sign up" className='md:hidden object-cover min-w-full' />
@@ -35,8 +36,9 @@ export default function Home() {
         {/* Email form */}
         <EmailForm className="mt-auto" />
       </div>
-
       </section>
+      {/* Success message */}
+      {success === 'true' && <Subscribed />}
     </main>
   );
 }

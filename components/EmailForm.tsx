@@ -1,5 +1,5 @@
 'use client';
-import React, { useContext } from 'react'
+import React from 'react'
 import clsx from 'clsx';
 import { useNewsletterContext } from '@/context/NewsletterContext';
 
@@ -12,10 +12,10 @@ export default function EmailForm({className}: {className?: string}) {
         var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
         if (email.match(validRegex)) {
-            setSuccess(true);
+            setSuccess('true');
       
         } else {            
-            setSuccess(false);
+            setSuccess('false');
             document.querySelector('.error')?.classList.remove('hidden');
         } 
     }
@@ -26,7 +26,7 @@ export default function EmailForm({className}: {className?: string}) {
             <label
             htmlFor="email"
             className='text-[0.8rem] font-bold'>Email address</label>
-            <span className={clsx(`text-[0.8rem] font-bold text-tomato`, {'block':!success, 'hidden':success})}>Valid email required</span>
+            {(success == 'false' || null) && <span className={clsx(`text-[0.8rem] font-bold text-tomato`)}>Valid email required</span>}
         </div>
         <input 
         type="text" 
@@ -35,7 +35,7 @@ export default function EmailForm({className}: {className?: string}) {
         placeholder="email@company.com" 
         value={email} 
         onChange={(e) => setEmail(e.target.value)} 
-        className={clsx('my-2 py-3 px-2 rounded-lg border border-grey/[0.3] focus:border-grey focus:outline-none', {'error':!success} )}/>
+        className={clsx('my-2 py-3 px-2 rounded-lg border border-grey/[0.3] focus:border-grey focus:outline-none', {'error':success == 'false'} )}/>
         
         <button className='text-sm font-semibold text-white rounded-md px-4 py-3 bg-charcoalGray active:bg-gradient-to-r from-[#ff527a] to-[#fe6a3b] mt-4'>
             Subscribe to monthly newsletter

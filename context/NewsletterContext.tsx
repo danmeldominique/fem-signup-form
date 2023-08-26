@@ -6,18 +6,20 @@ type NewsletterProviderProps = {
   children: React.ReactNode
 }
 
+type SuccessState = 'true' | 'false' | null
+
 type NewsletterContext = {
   email: string
   setEmail: React.Dispatch<React.SetStateAction<string>>
-  success: boolean
-  setSuccess: React.Dispatch<React.SetStateAction<boolean>>
+  success: SuccessState
+  setSuccess: React.Dispatch<React.SetStateAction<SuccessState>>
 }
 
 export const NewsletterContext = createContext<NewsletterContext | null>(null);
 
 export default function NewsletterContextProvider({children}: NewsletterProviderProps ) {
   const [email, setEmail] = useState('')
-  const [success, setSuccess] = useState(false)
+  const [success, setSuccess] = useState<SuccessState>(null)
 
   return (
     <NewsletterContext.Provider value={{email, setEmail, success, setSuccess}}>
