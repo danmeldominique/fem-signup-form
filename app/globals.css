@@ -6,4 +6,8 @@
   html {
     font-family: Roboto, sans-serif;
   }
+
+  .error {
+    @apply  bg-tomato/[0.2] text-tomato  !border-tomato placeholder:text-tomato
+  }
 }
